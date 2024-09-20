@@ -1,0 +1,5 @@
+---
+AllowShortCaseExpressionOnASingleLine:
+  Enabled: true
+AllowShortCaseLabelsOnASingleLine:
+  Enabled: true
