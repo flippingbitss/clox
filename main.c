@@ -13,8 +13,8 @@ static void repl() {
       printf("\n");
       break;
     }
+    interpret(line);
   }
-  // interpret(line);
 }
 
 static char *readFile(const char *path) {

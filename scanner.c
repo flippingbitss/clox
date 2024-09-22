@@ -1,5 +1,6 @@
 #include "scanner.h"
 #include <stdbool.h>
+#include <stdio.h>
 #include <string.h>
 
 typedef struct {
@@ -185,6 +186,7 @@ void initScanner(const char *source) {
 }
 
 Token scanToken() {
+  skipWhitespace();
   scanner.start = scanner.current;
 
   if (isAtEnd())
@@ -228,6 +230,5 @@ Token scanToken() {
   case '"':
     return string();
   }
-
   return errorToken("Unexpected character.");
 }
