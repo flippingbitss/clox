@@ -193,9 +193,12 @@ Token scanToken() {
     return makeToken(TOKEN_EOF);
 
   char c = advance();
-  if (isDigit(c))
+  if (isAlphabet(c)) {
+    return identifier();
+  }
+  if (isDigit(c)) {
     return number();
-
+  }
   switch (c) {
   case '(':
     return makeToken(TOKEN_LEFT_PAREN);
