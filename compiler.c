@@ -2,6 +2,7 @@
 #include "compiler.h"
 #include "chunk.h"
 #include "debug.h"
+#include "object.h"
 #include "scanner.h"
 #include "value.h"
 
@@ -194,6 +195,13 @@ static void literal() {
   }
 }
 
+static void string() {
+  ObjString *str =
+      copyString(parser.previous.start + 1, parser.previous.length - 2);
+  printf("copyString: %s\n", str->chars);
+  emitConstant(OBJ_VAL(str));
+}
+
 static void binary() {
   TokenType operatorType = parser.previous.type;
   ParseRule *rule = getRule(operatorType);
@@ -256,7 +264,7 @@ ParseRule rules[] = {
     [TOKEN_LESS] = {NULL, binary, PREC_COMPARISON},
     [TOKEN_LESS_EQUAL] = {NULL, binary, PREC_COMPARISON},
     [TOKEN_IDENTIFIER] = {NULL, NULL, PREC_NONE},
-    [TOKEN_STRING] = {NULL, NULL, PREC_NONE},
+    [TOKEN_STRING] = {string, NULL, PREC_NONE},
     [TOKEN_NUMBER] = {number, NULL, PREC_NONE},
     [TOKEN_AND] = {NULL, NULL, PREC_NONE},
     [TOKEN_CLASS] = {NULL, NULL, PREC_NONE},

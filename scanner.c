@@ -1,5 +1,4 @@
 #include "scanner.h"
-#include <stdbool.h>
 #include <stdio.h>
 #include <string.h>
 
@@ -19,6 +18,9 @@ static Token makeToken(TokenType type) {
   token.start = scanner.start;
   token.length = (int)(scanner.current - scanner.start);
   token.line = scanner.line;
+  if (token.type == TOKEN_STRING) {
+    printf("string token length %d", token.length - 2);
+  }
   return token;
 }
 
